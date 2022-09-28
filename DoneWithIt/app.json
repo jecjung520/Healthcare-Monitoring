@@ -28,6 +28,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "description": "A baseline for Attendance Taking with Mobile Ad Hoc Library"
   }
 }
