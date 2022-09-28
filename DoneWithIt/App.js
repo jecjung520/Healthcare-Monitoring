@@ -1,22 +1,23 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView } from 'react-native';
 
 export default function App() {
 
-  console.log("App Executed");
+  const handlePress = () => console.log("Text Pressed");
+
   return (
-    <View style={styles.container}>
-      <Text>Cyka Blyat</Text>
+    <SafeAreaView style={styles.container}>
+      <Text onPress={handlePress}>Cyka Blyat Nahui Sooka </Text>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: 'dodgerblue'
+    //alignItems: 'center',
+    //justifyContent: 'center',
   },
 });
