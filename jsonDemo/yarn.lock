@@ -8906,7 +8906,12 @@
     "react" "16.0.0"
     "react-dom" "16.0.0"
 
-"react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", "react@^18.0.0", "react@18.0.0":
+"react-thermometer@^0.0.3":
+  "integrity" "sha512-bsCLvJJWO4BSyVGqlDOc7e1syPU11FEtUXeA1KmiiOuVOx7LcSa2nW8t4mv9SDOz/U2WZ0GBjYsb1lLVn3eYWg=="
+  "resolved" "https://registry.npmjs.org/react-thermometer/-/react-thermometer-0.0.3.tgz"
+  "version" "0.0.3"
+
+"react@^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^17.0.2 || ^18.0.0", "react@^18.0.0", "react@>= 0.14.0", "react@18.0.0":
   "integrity" "sha512-x+VL6wbT4JRVPm7EGxXhZ8w8LTROaxPXOqhlGyVSrv0sB1jkyFGgXxJ8LVoPRLvPR6/CIZGFmfzqUa2NYeMr2A=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.0.0.tgz"
   "version" "18.0.0"

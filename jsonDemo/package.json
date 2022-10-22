@@ -18,6 +18,7 @@
     "react-native-fs": "^2.20.0",
     "react-native-pulse": "^1.0.7",
     "react-native-web": "~0.18.7",
+    "react-thermometer": "^0.0.3",
     "react-thermometer-component": "^1.0.1"
   },
   "devDependencies": {

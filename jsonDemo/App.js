@@ -40,16 +40,6 @@ export default class App extends React.Component {
         </View>
       )
     } else {
-      /*
-            var obj = JSON.parse(this.state.dataSource);
-            var fields = obj.field1[0];
-      
-      var feeds = this.state.dataSource.map((val, key) => {
-        return <View key={key} style={styles.item}>
-          <Text>{val.field1}</Text>
-        </View>
-      });
-      */
 
       var feeds = this.state.dataSource.map((val, key) => {
         return val.field1
@@ -57,20 +47,37 @@ export default class App extends React.Component {
 
       const Pulse = require('react-native-pulse').default;
 
+      const temp_rate = feeds[1];
+      const pulse_rate = feeds[0];
 
       return (
         <View style={styles.container}>
-          <Thermometer
-            theme="light"
-            value={feeds[1]}
-            max={100}
-            steps="3"
-            format="°C"
-            size="large"
-            height="300"
-          />
-          <Pulse color='orange' numPulses={3} diameter={400} speed={20} duration={2000} />
-        </View>
+          <View style={styles.leftcontainer}>
+            {temp_rate >= 39 &&
+              <Text>Temperature too high</Text>
+            }
+            {temp_rate <= 35 &&
+              <Text>Temperature too low</Text>
+            }
+            <Thermometer
+              theme="light"
+              value={feeds[1]}
+              max={100}
+              steps="3"
+              format="°C"
+              size="large"
+              height="300"
+            />
+          </View>
+          <View style={styles.rightcontainer}>
+            {pulse_rate < 80
+              ? <Pulse color='blue' numPulses={3} diameter={400} speed={20} duration={2000} />
+              : <Pulse color='orange' numPulses={3} diameter={400} speed={20} duration={2000} />
+            }
+            <Text>Pulse Rate: {pulse_rate}BPM
+            </Text>
+          </View >
+        </View >
       );
 
     }
@@ -80,12 +87,23 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginHorizontal: "30%",
-    backgroundColor: 'white',
-    alignItems: 'left',
-    justifyContent: 'center',
+    height: 800,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginHorizontal: '25%',
   },
+  leftcontainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignContent: 'center',
+  },
+  rightcontainer: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+  }
 });
 
 const pulsStyles = StyleSheet.create({
