@@ -14,7 +14,8 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    return fetch('https://api.thingspeak.com/channels/1874095/fields/1.json?results=2')
+    //return fetch('https://api.thingspeak.com/channels/1874095/feeds.json?results=2')
+    return fetch('https://api.thingspeak.com/channels/1887337/feeds.json?results=2')
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -44,11 +45,14 @@ export default class App extends React.Component {
       var feeds = this.state.dataSource.map((val, key) => {
         return val.field1
       });
+      var feeds1 = this.state.dataSource.map((val, key) => {
+        return val.field2
+      });
 
       const Pulse = require('react-native-pulse').default;
 
-      const temp_rate = feeds[1];
-      const pulse_rate = feeds[0];
+      const temp_rate = feeds[0];
+      const pulse_rate = feeds1[0];
 
       return (
         <View style={styles.container}>
@@ -61,7 +65,7 @@ export default class App extends React.Component {
             }
             <Thermometer
               theme="light"
-              value={feeds[1]}
+              value={temp_rate}
               max={100}
               steps="3"
               format="°C"
@@ -77,6 +81,9 @@ export default class App extends React.Component {
             <Text>Pulse Rate: {pulse_rate}BPM
             </Text>
           </View >
+          <View style={styles.container}>
+
+          </View>
         </View >
       );
 
@@ -91,19 +98,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: '25%',
+    marginHorizontal: '20%',
   },
   leftcontainer: {
-    flex: 1,
+    //flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignContent: 'center',
+    //alignContent: 'center',
   },
   rightcontainer: {
-    flex: 1,
+    //flex: 1,
     flexDirection: 'row',
     justifyContent: 'flex-end',
-  }
+  },
+  tinylogo: {
+    width: 100,
+    height: 100,
+  },
 });
 
 const pulsStyles = StyleSheet.create({
