@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom'
 import Thermometer from 'react-thermometer-component'
-import { StyleSheet, Button, Text, View, ActivityIndicator, Pressable, TextInput, TouchableHighlight } from 'react-native';
+import { StyleSheet, Button, Text, View, ActivityIndicator, Pressable, TextInput, TouchableHighlight, TouchableOpacity  } from 'react-native';
 
 export default class App extends React.Component {
 
@@ -14,7 +14,8 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    //return fetch('https://api.thingspeak.com/channels/1874095/feeds.json?results=2')
+    document.title = "Temperature and Pulse Monitoring"
+
     return fetch('https://api.thingspeak.com/channels/1887337/feeds.json?results=2')
       .then((response) => response.json())
       .then((responseJson) => {
@@ -30,6 +31,11 @@ export default class App extends React.Component {
       });
 
   }
+
+  handleClick() {
+    window.location.reload();
+  }
+
 
   render() {
 
@@ -51,40 +57,54 @@ export default class App extends React.Component {
 
       const Pulse = require('react-native-pulse').default;
 
-      const temp_rate = feeds[0];
-      const pulse_rate = feeds1[0];
+      const temp_rate = (feeds[1]) ? feeds[1] : feeds[0];
+      const pulse_rate = (feeds1[1]) ? feeds1[1] : feeds1[0];
 
       return (
-        <View style={styles.container}>
-          <View style={styles.leftcontainer}>
-            {temp_rate >= 39 &&
-              <Text>Temperature too high</Text>
-            }
-            {temp_rate <= 35 &&
-              <Text>Temperature too low</Text>
-            }
-            <Thermometer
-              theme="light"
-              value={temp_rate}
-              max={100}
-              steps="3"
-              format="°C"
-              size="large"
-              height="300"
-            />
-          </View>
-          <View style={styles.rightcontainer}>
-            {pulse_rate < 80
-              ? <Pulse color='blue' numPulses={3} diameter={400} speed={20} duration={2000} />
-              : <Pulse color='orange' numPulses={3} diameter={400} speed={20} duration={2000} />
-            }
-            <Text>Pulse Rate: {pulse_rate}BPM
-            </Text>
-          </View >
+        <View style={styles.header}>
+          <Text style={styles.titleScreen}>Temperature and Pulse Rate</Text>
           <View style={styles.container}>
-
-          </View>
-        </View >
+            <View style={styles.leftcontainer}>
+              {temp_rate >= 39 &&
+                <View style={styles.alertIcon}>
+                  <Text>Temperature too high</Text>
+                  <img src={require('./alert-icon-red.png')}/>
+                </View>
+              }
+              {temp_rate <= 35 &&
+                <View style={styles.alertIcon}>
+                  <Text>Temperature too low</Text>
+                  <img src={require('./alert-icon-red.png')}/>
+                </View>
+              }
+              <Thermometer
+                theme="light"
+                value={temp_rate}
+                max={100}
+                steps="3"
+                format="°C"
+                size="large"
+                height="300"
+              />
+            </View>
+            <View style={styles.rightcontainer}>
+              {pulse_rate < 80
+                ? <Pulse color='blue' numPulses={3} diameter={400} speed={20} duration={2000} />
+                : <Pulse color='orange' numPulses={3} diameter={400} speed={20} duration={2000} />
+              }
+              <Text style={{fontWeight: "bold"}}>Pulse Rate: {pulse_rate}BPM
+              </Text>
+            </View >
+            <View style={styles.tinylogo}>
+              <img src={require('./avg-heart-rate.jpeg')}/>
+              <img src={require('./normal-body-temp.jpg')}/>
+            </View>
+          </View >
+          <TouchableOpacity 
+            onPress={this.handleClick}>
+            <Text style={styles.pulseButton}>RELOAD</Text>
+          </TouchableOpacity>
+        </View>
       );
 
     }
@@ -98,23 +118,58 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginHorizontal: '20%',
+    marginHorizontal: '15%',
   },
   leftcontainer: {
     //flex: 1,
+    
     flexDirection: 'row',
     justifyContent: 'flex-start',
     //alignContent: 'center',
   },
   rightcontainer: {
     //flex: 1,
+    height: 0,
     flexDirection: 'row',
     justifyContent: 'flex-end',
   },
   tinylogo: {
-    width: 100,
-    height: 100,
+    width: 450,
+    height: 650,
   },
+  titleScreen: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontSize: 40,
+    fontWeight: "bold",
+  },
+  alertIcon: {
+    width:100,
+    height:100,
+  },
+  header: {
+    marginTop: 16,
+    paddingVertical: 8,
+    backgroundColor: "#61dafb",
+    color: "#20232a",
+    textAlign: "center",
+    fontSize: 40,
+    fontWeight: "bold"
+  },
+  tempButton: {
+    flexDirection: 'row', 
+    height: 50, 
+    alignItems: 'center',
+    justifyContent: 'center',
+
+  },
+  pulseButton: {
+    height: 50,
+    fonrtSize: 15,
+    fontWeight: "bold",
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });
 
 const pulsStyles = StyleSheet.create({
