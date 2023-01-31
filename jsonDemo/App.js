@@ -48,17 +48,17 @@ export default class App extends React.Component {
       )
     } else {
 
-      var feeds = this.state.dataSource.map((val, key) => {
+      var feeds1 = this.state.dataSource.map((val, key) => {
         return val.field1
       });
-      var feeds1 = this.state.dataSource.map((val, key) => {
+      var feeds2 = this.state.dataSource.map((val, key) => {
         return val.field2
       });
 
       const Pulse = require('react-native-pulse').default;
 
-      const temp_rate = (feeds[1]) ? feeds[1] : feeds[0];
-      const pulse_rate = (feeds1[1]) ? feeds1[1] : feeds1[0];
+      const temp_rate = (feeds1[1]) ? feeds1[1] : feeds1[0];
+      const pulse_rate = (feeds2[1]) ? feeds2[1] : feeds2[0];
 
       return (
         <View style={styles.header}>
@@ -88,7 +88,7 @@ export default class App extends React.Component {
               />
             </View>
             <View style={styles.rightcontainer}>
-              {pulse_rate < 80
+              {pulse_rate < 70
                 ? <Pulse color='blue' numPulses={3} diameter={400} speed={20} duration={2000} />
                 : <Pulse color='orange' numPulses={3} diameter={400} speed={20} duration={2000} />
               }

@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "react-native-fusioncharts": "^4.1.2"
+    "react-native-fusioncharts": "^4.1.2",
+    "react-native-web": "^0.18.9"
   }
 }
