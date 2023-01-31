@@ -68,13 +68,13 @@ export default class App extends React.Component {
               {temp_rate >= 39 &&
                 <View style={styles.alertIcon}>
                   <Text>Temperature too high</Text>
-                  <img src={require('./alert-icon-red.png')}/>
+                  <img src={require('pics/alert-icon-red.png')}/>
                 </View>
               }
               {temp_rate <= 35 &&
                 <View style={styles.alertIcon}>
                   <Text>Temperature too low</Text>
-                  <img src={require('./alert-icon-red.png')}/>
+                  <img src={require('pics/alert-icon-red.png')}/>
                 </View>
               }
               <Thermometer
@@ -96,8 +96,8 @@ export default class App extends React.Component {
               </Text>
             </View >
             <View style={styles.tinylogo}>
-              <img src={require('./avg-heart-rate.jpeg')}/>
-              <img src={require('./normal-body-temp.jpg')}/>
+              <img src={require('pics/avg-heart-rate.jpeg')}/>
+              <img src={require('pics/normal-body-temp.jpg')}/>
             </View>
           </View >
           <TouchableOpacity 
